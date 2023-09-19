@@ -47,6 +47,9 @@ class Oven(Appliance):
 
   def __checkWarranty(self):
     # for simplicity sakes... im only accessing the protected method here
+    # public open access
+    # protected is only accessible by class or class derived from it
+    # private only accessible by class
     self._getSerial()
     return True
 
