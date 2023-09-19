@@ -76,3 +76,18 @@ class Microwave(Appliance):
 # - fan on/off, - fan timer, - fan intensity
 # it should be open to extension, but turning on/off a fan by its intensity should be closed. no child method of this should touch fan timer if the parent did not
 # and MotorizedFanAppliance is a separate interface from CookingAppliance, which may have similiar properties but do completely separate things.
+
+# TODO: should be in a separate file, but just putting notes here
+class MotorizedFanAppliance:
+  pass
+
+class HeatBasedCookingAppliance:
+  pass
+
+class InductionCookingAppliance:
+  pass
+
+class RefridgerationAppliance:
+  pass
+
+# this is a good example of Dependency inversion, rather than doing an InterfaceAppliance that 'does it all'
