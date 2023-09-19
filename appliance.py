@@ -48,6 +48,9 @@ class Oven(Appliance):
 
 
 class Microwave(Appliance):
+  def cook():
+    super().cook()
+
   def ding(self, time, intensity):
     if (self.power):
       print('{} microwaving something for {} seconds at {} intensity'.format(self.name, time, intensity))
