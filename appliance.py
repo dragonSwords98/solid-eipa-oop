@@ -30,6 +30,9 @@ class Appliance(TimedInterface):
   def power(self, on=True):
     self.power = on
 
+  def _getSerial():
+    pass
+
 
 class Oven(Appliance):
   def broil(self, time):
@@ -42,8 +45,9 @@ class Oven(Appliance):
     if self.power:
       print('{} cooking indefinitely at {} degrees F'.format(self.name, temperature))
 
-  def __checkWarranty():
-    # for simplicity sakes...
+  def __checkWarranty(self):
+    # for simplicity sakes... im only accessing the protected method here
+    self._getSerial()
     return True
 
 
