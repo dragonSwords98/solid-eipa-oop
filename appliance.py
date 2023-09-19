@@ -7,17 +7,25 @@
 # ASSIGNMENT:
 # write a basic monolithic code class, then apply SOLID principles to it
 
-class Appliance:
+from abc import abstractmethod
+
+class TimedInterface:
   name = ''
   power = False
 
+  @abstractmethod
+  def cook():
+    pass
+    
+
+class Appliance(TimedInterface):
   def __init__(self, name):
     self.name = name
     print('The name of this appliance is '.format(self.name))
 
-  def cook(self, time, temperature):
+  def cook(self, temperature):
     if (self.power):
-      print('{} cooking for {} seconds at {} degrees F'.format(self.name, time, temperature))
+      print('{} cooking indefinitely at {} degrees F'.format(self.name, temperature))
 
   def power(self, on=True):
     self.power = on
@@ -28,11 +36,11 @@ class Oven(Appliance):
     if self.power and self.__checkWarranty():
       print('{} broiling for {} seconds'.format(self.name, time))
 
-  def cook(self, time, temperature, light):
+  def cook(self, temperature, light):
     if light:
       self.light = True
     if self.power:
-      print('{} cooking for {} seconds at {} degrees F with the light set on as {}'.format(self.name, time, temperature, light))
+      print('{} cooking indefinitely at {} degrees F'.format(self.name, temperature))
 
   def __checkWarranty():
     # for simplicity sakes...
@@ -64,3 +72,7 @@ class Microwave(Appliance):
 # it will not use certain things. that's a violation
 #D ependency Inversion - classes should depend on interfaces or abstract classes, never depend on concrete classes and functions.
 
+# something like adding a range hood to Oven would be a violation of SOLID, basically all of them. Range Hood should be a single responsbility class, interfaced from an interface like 'MotorizedFanAppliance' to have features like
+# - fan on/off, - fan timer, - fan intensity
+# it should be open to extension, but turning on/off a fan by its intensity should be closed. no child method of this should touch fan timer if the parent did not
+# and MotorizedFanAppliance is a separate interface from CookingAppliance, which may have similiar properties but do completely separate things.
